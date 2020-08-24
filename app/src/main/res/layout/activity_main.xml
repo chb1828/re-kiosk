@@ -3,23 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
+<!--
+    <include
+        layout="@layout/nav_bar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name" />
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <fragment
+            android:id="@+id/listFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="org.rtruesoft.kiosk.list.ListFragment"/>
+    </FrameLayout>
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:entries="@array/menu"
-        android:gravity="center"
-        android:spinnerMode="dropdown" />
-
-
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:id="@+id/container">
+        <fragment
+            android:id="@+id/viewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="org.rtruesoft.kiosk.view.ViewFragment"/>
+    </FrameLayout>
 
 </LinearLayout>
