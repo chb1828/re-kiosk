@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">키오스크</string>
+    <!--Kiosk Mode-->
+    <string name="device_admin_enabled">장치관리자 활성화</string>
+    <string name="device_admin_warning">경고: 장치 관리자가 비활성화 됩니다.</string>
+    <string name="device_admin_disabled">장치 관리자 비활성화</string>
+    <string name="kiosk_mode_enabled">키오스크 모드 활성화</string>
+    <string name="kiosk_mode_disabled">키오스크 모드 비활성화</string>
+    <string name="kiosk_not_permitted">키오스크 모드가 허가되지 않음</string>
+    <string name="not_device_admin">이 앱은 관리자 앱이 아닙니다.</string>
+    <string name="not_device_owner">이 앱은 소유자 앱이 아닙니다.</string>
+    <string name="enabled_button">활성화</string>
+    <string name="another_activity">다른 액티비티 이동</string>
+</resources>
