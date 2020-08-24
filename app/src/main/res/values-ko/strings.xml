@@ -11,4 +11,19 @@
     <string name="not_device_owner">이 앱은 소유자 앱이 아닙니다.</string>
     <string name="enabled_button">활성화</string>
     <string name="another_activity">다른 액티비티 이동</string>
+    <string name="menu_event">행사</string>
+    <string name="menu_restaurant">맛집</string>
+    <string name="menu_scene">경관</string>
+    <string name="menu_scene_sub_title">관광지를 둘러보세요</string>
+    <string name="menu_restaurant_sub_title">주변 식당을 찾아보세요</string>
+    <string name="menu_event_sub_title">행사를 확인해보세요</string>
+    <string name="menu_scene_sub_1">주변 관광지</string>
+    <string name="menu_scene_sub_2">관광뷰</string>
+    <string name="menu_scene_sub_3">포토존</string>
+    <string name="menu_restaurant_sub_1">매우 가까운 식당(1km)</string>
+    <string name="menu_restaurant_sub_2">가까운 식당(5km)</string>
+    <string name="menu_restaurant_sub_3">조금 먼 식당(10km)</string>
+    <string name="menu_event_sub_1">수련 문화제</string>
+    <string name="menu_event_sub_2">연꽃 문화제</string>
+    <string name="menu_event_sub_3">봄빛 정원</string>
 </resources>

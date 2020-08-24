@@ -10,4 +10,22 @@
     <string name="not_device_owner">This app is not the device owner!</string>
     <string name="enabled_button">ENABLED</string>
     <string name="another_activity">Move to Other Activity</string>
+    <string name="menu_event">event</string>
+    <string name="menu_restaurant">restaurant</string>
+    <string name="menu_scene">scene</string>
+    <string name="menu_scene_sub_title">Explore tourist attractions</string>
+    <string name="menu_restaurant_sub_title">Find nearby restaurants</string>
+    <string name="menu_event_sub_title">Check out the event</string>
+    <string name="menu_scene_sub_1">Nearby attractions</string>
+    <string name="menu_scene_sub_2">Attractions view</string>
+    <string name="menu_scene_sub_3">Photo Zone</string>
+    <string name="menu_restaurant_sub_1">Very close restaurant(1km)</string>
+    <string name="menu_restaurant_sub_2">Close restaurant(5km)</string>
+    <string name="menu_restaurant_sub_3">A little distant restaurant(10km)</string>
+    <string name="menu_event_sub_1">수련 문화제(Not translated)</string>
+    <string name="menu_event_sub_2">연꽃 문화제(Not translated)</string>
+    <string name="menu_event_sub_3">봄빛 정원(Not translated)</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
