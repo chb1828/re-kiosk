@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+            <Button
+                android:id="@+id/event_btn1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/menu_event_sub_1"
+                android:textColor="#fff" />
+            <Button
+                android:id="@+id/event_btn2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/menu_event_sub_2"
+                android:textColor="#fff" />
+            <Button
+                android:id="@+id/event_btn3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/menu_event_sub_3"
+                android:textColor="#fff" />
+
+
+</LinearLayout>
