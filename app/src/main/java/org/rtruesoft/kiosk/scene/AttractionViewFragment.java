@@ -10,20 +10,16 @@ import android.view.ViewGroup;
 
 import org.rtruesoft.kiosk.R;
 
-
-public class SceneFragment extends Fragment {
-
+public class AttractionViewFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scene, container, false);
+        return inflater.inflate(R.layout.fragment_attraction_view, container, false);
     }
 }

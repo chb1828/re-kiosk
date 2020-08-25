@@ -8,18 +8,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+
+
 import org.rtruesoft.kiosk.event.EventFragment;
 import org.rtruesoft.kiosk.restaurant.RestaurantFragment;
-import org.rtruesoft.kiosk.scene.SceneFragment;
+import org.rtruesoft.kiosk.scene.AttractionFragment;
+import org.rtruesoft.kiosk.scene.AttractionViewFragment;
+
 
 public class MainActivity extends BaseActivity {
 
+    public static Context mainContext;
     private Spinner spinner;
     static final String TAG = "키오스크 테스트";
     private String mLanguageCode = "ko";
     private boolean isUserAction = false;
 
-    SceneFragment sceneFragment;
+
+    AttractionFragment attractionFragment;
+    AttractionViewFragment attractionViewFragment;
     RestaurantFragment restaurantFragment;
     EventFragment eventFragment;
 
@@ -33,9 +40,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sceneFragment = new SceneFragment();
+        mainContext = this;
+        attractionFragment = new AttractionFragment();
+        attractionViewFragment = new AttractionViewFragment();
         restaurantFragment = new RestaurantFragment();
         eventFragment = new EventFragment();
+
 
         spinner = findViewById(R.id.spinner);
         setUpAdmin();
@@ -60,18 +70,22 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
     }
 
     public void onFragmentChanged(int index) {
-        if(index == 0 ) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,sceneFragment).commit();
-        }else if(index == 1) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,restaurantFragment).commit();
-        }else if(index == 2) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,eventFragment).commit();
+        switch (index) {
+            case 0:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, attractionFragment).commit();
+                break;
+            case 1:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,attractionViewFragment).commit();
+                break;
+            case 2:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,eventFragment).commit();
+                break;
         }
     }
-
 
 
 }
