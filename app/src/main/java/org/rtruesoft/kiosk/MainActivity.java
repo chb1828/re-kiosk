@@ -46,6 +46,8 @@ public class MainActivity extends BaseActivity {
         restaurantFragment = new RestaurantFragment();
         eventFragment = new EventFragment();
 
+        //첫화면 설정
+       getSupportFragmentManager().beginTransaction().replace(R.id.container, attractionFragment).commit();
 
         spinner = findViewById(R.id.spinner);
         setUpAdmin();

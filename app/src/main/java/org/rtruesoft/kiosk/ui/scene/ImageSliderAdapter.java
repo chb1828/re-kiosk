@@ -59,7 +59,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
                     case 3:
                         holder.img4.setImageBitmap(photos.get(i));
                         break;
-                  /*  case 4:
+/*                    case 4:
                         holder.img5.setImageBitmap(photos.get(i));
                         break;*/
                 }
@@ -113,7 +113,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
             img2 = itemView.findViewById(R.id.sliderImage2);
             img3 = itemView.findViewById(R.id.sliderImage3);
             img4 = itemView.findViewById(R.id.sliderImage4);
-           // img5 = itemView.findViewById(R.id.sliderImage5);
+            //img5 = itemView.findViewById(R.id.sliderImage5);
         }
     }
 
