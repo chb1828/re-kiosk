@@ -24,7 +24,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.rtruesoft.kiosk.R;
 import org.rtruesoft.kiosk.dto.GetResultDetails;
 import org.rtruesoft.kiosk.service.DataLoadTask;
-import org.rtruesoft.kiosk.service.ImageLoadTask;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -60,25 +59,9 @@ public class AttractionFragment extends Fragment implements OnMapReadyCallback {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-
         sliderPager = rootView.findViewById(R.id.photoViewPager);
         sliderPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         sliderPager.setOffscreenPageLimit(3);
-
-        try {
-            DataLoadTask task = new DataLoadTask();
-            resultsDetails = (ArrayList<GetResultDetails>) task.execute().get();
-            ImageLoadTask task2 = new ImageLoadTask(resultsDetails);
-            photos = (ArrayList<Bitmap>) task2.execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        imageSliderAdapter = new ImageSliderAdapter(mContext,photos);
-        sliderPager.setAdapter(imageSliderAdapter);
 
 
         final float pageMargin= 30.0f;
@@ -98,13 +81,22 @@ public class AttractionFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
-
         return rootView;
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
+
+        try {
+            DataLoadTask task = new DataLoadTask();
+            resultsDetails = (ArrayList<GetResultDetails>) task.execute().get();
+            imageSliderAdapter = new ImageSliderAdapter(mContext,resultsDetails,googleMap);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sliderPager.setAdapter(imageSliderAdapter);
 
         for(GetResultDetails details : resultsDetails) {
             double geometryLat = ((Map<String,Double>)details.getGeometry().get("location")).get("lat");
