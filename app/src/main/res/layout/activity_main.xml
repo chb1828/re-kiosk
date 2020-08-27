@@ -20,7 +20,7 @@
             android:id="@+id/listFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="org.rtruesoft.kiosk.list.ListFragment"/>
+            android:name="org.rtruesoft.kiosk.ui.list.ListFragment"/>
     </FrameLayout>
 
     <FrameLayout
@@ -32,7 +32,7 @@
             android:id="@+id/viewFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="org.rtruesoft.kiosk.view.ViewFragment"/>
+            android:name="org.rtruesoft.kiosk.ui.view.ViewFragment"/>
     </FrameLayout>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package org.rtruesoft.kiosk.view;
+package org.rtruesoft.kiosk.ui.event;
 
 import android.os.Bundle;
 
@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 
 import org.rtruesoft.kiosk.R;
 
-
-public class ViewFragment extends Fragment {
-
+public class EventFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,10 +21,7 @@ public class ViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_view,container,false);
-
-        return rootView;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_event, container, false);
     }
-
-
 }

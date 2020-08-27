@@ -1,4 +1,4 @@
-package org.rtruesoft.kiosk.list;
+package org.rtruesoft.kiosk.ui.list;
 
 import android.app.Fragment;
 import android.os.Bundle;
