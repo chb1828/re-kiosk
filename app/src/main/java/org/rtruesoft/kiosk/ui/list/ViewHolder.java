@@ -1,4 +1,4 @@
-package org.rtruesoft.kiosk.list;
+package org.rtruesoft.kiosk.ui.list;
 
 import android.view.View;
 import android.view.ViewStub;

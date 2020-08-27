@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -33,4 +37,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
+    //구글맵
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //rest api 라이브러리
+    implementation 'com.squareup.retrofit2:retrofit:2.6.4'
+
+// Gson 변환기 라이브러리
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
+
+// Scalars 변환기 라이브러리
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.4'
+
+    //슬라이더
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'me.relex:circleindicator:2.1.4'
 }

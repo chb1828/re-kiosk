@@ -1,4 +1,4 @@
-package org.rtruesoft.kiosk.scene;
+package org.rtruesoft.kiosk.ui.restaurant;
 
 import android.os.Bundle;
 
@@ -10,16 +10,19 @@ import android.view.ViewGroup;
 
 import org.rtruesoft.kiosk.R;
 
-public class AttractionViewFragment extends Fragment {
+
+public class RestaurantFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_attraction_view, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_restaurant, container, false);
     }
 }

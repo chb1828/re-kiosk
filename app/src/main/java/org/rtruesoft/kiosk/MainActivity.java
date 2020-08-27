@@ -10,10 +10,10 @@ import android.widget.Spinner;
 
 
 
-import org.rtruesoft.kiosk.event.EventFragment;
-import org.rtruesoft.kiosk.restaurant.RestaurantFragment;
-import org.rtruesoft.kiosk.scene.AttractionFragment;
-import org.rtruesoft.kiosk.scene.AttractionViewFragment;
+import org.rtruesoft.kiosk.ui.event.EventFragment;
+import org.rtruesoft.kiosk.ui.restaurant.RestaurantFragment;
+import org.rtruesoft.kiosk.ui.scene.AttractionFragment;
+import org.rtruesoft.kiosk.ui.scene.AttractionViewFragment;
 
 
 public class MainActivity extends BaseActivity {
@@ -46,6 +46,8 @@ public class MainActivity extends BaseActivity {
         restaurantFragment = new RestaurantFragment();
         eventFragment = new EventFragment();
 
+        //첫화면 설정
+       getSupportFragmentManager().beginTransaction().replace(R.id.container, attractionFragment).commit();
 
         spinner = findViewById(R.id.spinner);
         setUpAdmin();
