@@ -9,7 +9,6 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,26 +20,14 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
 
 import org.rtruesoft.kiosk.R;
-import org.rtruesoft.kiosk.dto.GetResult;
 import org.rtruesoft.kiosk.dto.GetResultDetails;
-import org.rtruesoft.kiosk.dto.GetResultPhoto;
-import org.rtruesoft.kiosk.service.ImageLoadTask;
-import org.rtruesoft.kiosk.service.RetrofitService;
+import org.rtruesoft.kiosk.service.DataLoadTask;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
+import java.util.concurrent.ExecutionException;
 
 public class AttractionFragment extends Fragment implements OnMapReadyCallback {
 
@@ -72,21 +59,9 @@ public class AttractionFragment extends Fragment implements OnMapReadyCallback {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-
         sliderPager = rootView.findViewById(R.id.photoViewPager);
         sliderPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         sliderPager.setOffscreenPageLimit(3);
-
-/*        ExecutorService es = Executors.newSingleThreadExecutor();
-        es.submit(()-> {
-            getMapData(); //맵 api 데이터 통신
-            getPhotoBitmap(); //장소 api 데이터 통신
-            imageSliderAdapter = new ImageSliderAdapter(mContext,photos);
-            sliderPager.setAdapter(imageSliderAdapter);
-        });
-
-        es.shutdown();*/
-
 
 
         final float pageMargin= 30.0f;
@@ -106,91 +81,36 @@ public class AttractionFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
-        getMapData();
-
-
         return rootView;
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
+
+        try {
+            DataLoadTask task = new DataLoadTask();
+            resultsDetails = (ArrayList<GetResultDetails>) task.execute().get();
+            imageSliderAdapter = new ImageSliderAdapter(mContext,resultsDetails,googleMap);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        sliderPager.setAdapter(imageSliderAdapter);
+
+        for(GetResultDetails details : resultsDetails) {
+            double geometryLat = ((Map<String,Double>)details.getGeometry().get("location")).get("lat");
+            double geometryLng = ((Map<String,Double>)details.getGeometry().get("location")).get("lng");
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(geometryLat,geometryLng));
+            markerOptions.title(details.getName());
+            gMap.addMarker(markerOptions);
+        }
         //구글맵의 위치 잡아줌
         MapsInitializer.initialize(this.getActivity());
         LatLng SEOUL = new LatLng(37.56, 126.97);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-    }
-
-    public void getMapData() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://maps.googleapis.com/maps/api/place/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RetrofitService service = retrofit.create(RetrofitService.class);
-
-        Call<GetResult> call = service.getApiData("seoul+city+point+of+interest","ko","AIzaSyB7SQvBe0JKzGn1KiMSX3N47l7_7Z1hNJw");
-
-        call.enqueue(new Callback<GetResult>() {
-            @Override
-            public void onResponse(Call<GetResult> call, Response<GetResult> response) {
-                if(response.isSuccessful()) {
-                    resultsDetails = response.body().getResults();
-                    getPhotoBitmap();
-                    for(GetResultDetails details : resultsDetails) {
-                        double geometryLat = ((Map<String,Double>)details.getGeometry().get("location")).get("lat");
-                        double geometryLng = ((Map<String,Double>)details.getGeometry().get("location")).get("lng");
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.position(new LatLng(geometryLat,geometryLng));
-                        markerOptions.title(details.getName());
-                        gMap.addMarker(markerOptions);
-                    }
-                }else{
-                    Log.d("테스트","실패" + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetResult> call, Throwable t) {
-                Log.d("테스트","완전 실패"+t.getMessage());
-            }
-        });
-        //return resultsDetails;
-    }
-
-    public void getPhotoBitmap() {
-         for(GetResultDetails grd : resultsDetails) {
-            Gson gson = new Gson();
-            GetResultPhoto grp = gson.fromJson(gson.toJson(grd.getPhotos().get(0)), GetResultPhoto.class);
-            String photoUrl = grp.getPhoto_reference();
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://maps.googleapis.com/maps/api/place/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            RetrofitService service = retrofit.create(RetrofitService.class);
-            service.getApiPhoto(400,photoUrl,"AIzaSyB7SQvBe0JKzGn1KiMSX3N47l7_7Z1hNJw")
-                    .enqueue(new Callback() {
-                        @Override
-                        public void onResponse(Call call, Response response) {
-                            String url = response.raw().request().url().toString();
-                            ImageLoadTask task = new ImageLoadTask(url);
-                            try {
-                                Bitmap bitmap = task.execute().get();
-                                photos.add(bitmap);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call call, Throwable t) {
-                            System.out.println("실패"+t.getMessage());
-                        }
-                    });
-        }
-        imageSliderAdapter = new ImageSliderAdapter(mContext,photos);
-        sliderPager.setAdapter(imageSliderAdapter);
     }
 
 
