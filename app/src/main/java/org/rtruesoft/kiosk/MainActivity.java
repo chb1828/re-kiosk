@@ -12,8 +12,9 @@ import android.widget.Spinner;
 
 import org.rtruesoft.kiosk.ui.event.EventFragment;
 import org.rtruesoft.kiosk.ui.restaurant.RestaurantFragment;
-import org.rtruesoft.kiosk.ui.scene.AttractionFragment;
+import org.rtruesoft.kiosk.ui.scene.attraction.AttractionFragment;
 import org.rtruesoft.kiosk.ui.scene.AttractionViewFragment;
+import org.rtruesoft.kiosk.ui.scene.photo.PhotoZoneFragment;
 
 
 public class MainActivity extends BaseActivity {
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity {
     AttractionFragment attractionFragment;
     AttractionViewFragment attractionViewFragment;
     RestaurantFragment restaurantFragment;
+    PhotoZoneFragment photoZoneFragment;
     EventFragment eventFragment;
 
     @Override
@@ -44,6 +46,7 @@ public class MainActivity extends BaseActivity {
         attractionFragment = new AttractionFragment();
         attractionViewFragment = new AttractionViewFragment();
         restaurantFragment = new RestaurantFragment();
+        photoZoneFragment = new PhotoZoneFragment();
         eventFragment = new EventFragment();
 
         //첫화면 설정
@@ -84,7 +87,7 @@ public class MainActivity extends BaseActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,attractionViewFragment).commit();
                 break;
             case 2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,eventFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,photoZoneFragment).commit();
                 break;
         }
     }

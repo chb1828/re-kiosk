@@ -1,4 +1,4 @@
-package org.rtruesoft.kiosk.ui.scene;
+package org.rtruesoft.kiosk.ui.scene.attraction;
 
 import android.content.Context;
 import android.graphics.Bitmap;
